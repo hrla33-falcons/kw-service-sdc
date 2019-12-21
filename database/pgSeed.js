@@ -26,28 +26,35 @@ const productType = [
 ];
 const dimensions = [
   'null',
-  '41 3/8x19 5/8"',
-  '28 3/4x19 5/8"',
-  '51 5/8x23 5/8"',
-  '47 1/4"',
-  '32 5/8x37x35 3/8"',
+  '41 3/8x19 5/8',
+  '28 3/4x19 5/8',
+  '51 5/8x23 5/8',
+  '47 1/4',
+  '32 5/8x37x35 3/8',
   '18 1/8x13 3/4',
   '15 3/8x16 1/8',
-  '23 5/8x15 3/8"',
-  '21 1/4x26"'
+  '23 5/8x15 3/8',
+  '21 1/4x26'
 ];
 
-const createProduct = function() {
+const createProduct = function(id) {
   var result = '';
   var randomProduct =
     productType[Math.floor(Math.random() * productType.length)];
   var randomDim = dimensions[Math.floor(Math.random() * dimensions.length)];
-  result += randomLorem().toUpperCase() + ',' + randomProduct + ',' + randomDim;
+  result +=
+    id.toString() +
+    ',' +
+    randomLorem().toUpperCase() +
+    ',' +
+    randomProduct +
+    ',' +
+    randomDim;
   return result;
 };
 
 const count = 10000000;
-const file = 'ikea_seed.csv';
+const file = 'database/ikea_seed.csv';
 
 // cli-progress bar
 const bar = new _progress.Bar({}, _progress.Presets.shades_grey);
@@ -62,23 +69,27 @@ const stream = fs.createWriteStream(file);
 stream.on('err', err => console.log(err));
 stream.on('close', () => {
   bar.stop();
+  console.timeEnd();
   console.log('Successfully wrote file!');
 });
 
+write10Mil();
 function write10Mil() {
+  console.time();
   let i = count;
+  // initiate the csv file with headers
+  writeFile();
+  // stream.write('id,name,type,dimensions\n');
   function writeFile() {
     let ok = true;
-    // initiate the csv file with headers
-    stream.write('name,type,dimensions\n');
     do {
       i--;
       // write the very last entry
       if (i === 0) {
-        stream.write(createProduct());
+        stream.write(createProduct(10000000 - i));
         stream.end();
       } else {
-        ok = stream.write(createProduct() + '\n');
+        ok = stream.write(createProduct(10000000 - i) + '\n');
         bar.update(count - i + 1);
       }
     } while (i > 0 && ok);
@@ -88,7 +99,4 @@ function write10Mil() {
       stream.once('drain', writeFile);
     }
   }
-  writeFile();
 }
-
-write10Mil();

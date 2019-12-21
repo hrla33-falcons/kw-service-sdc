@@ -11,3 +11,5 @@ CREATE TABLE products (
   dimensions TEXT
   PRIMARY KEY (id)
 );
+
+-- copy products from '/Users/katherinewang/Hack Reactor/HRLA33/SDC/searchbar-service/database/ikea_seed.csv' delimiter ',' csv header;
