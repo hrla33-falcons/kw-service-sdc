@@ -36,12 +36,25 @@ const dimensions = [
   '23 5/8x15 3/8',
   '21 1/4x26'
 ];
+const pics = createPicsArr();
+
+const createPicsArr = function() {
+  var picsArr = [];
+  for (var i = 0; i < 100; i++) {
+    picsArr.push(faker.image.imageUrl);
+  }
+  return picsArr;
+};
+
+// create one array of 6 pictures for each auto suggestion
+const createOnePicArr = function() {};
 
 const createProduct = function(id) {
   var result = '';
   var randomProduct =
     productType[Math.floor(Math.random() * productType.length)];
   var randomDim = dimensions[Math.floor(Math.random() * dimensions.length)];
+  var randomPic = pics[Math.floor(Math.random() * 100)];
   result +=
     id.toString() +
     ',' +
@@ -49,7 +62,9 @@ const createProduct = function(id) {
     ',' +
     randomProduct +
     ',' +
-    randomDim;
+    randomDim +
+    ',' +
+    randomPic;
   return result;
 };
 
