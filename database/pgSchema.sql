@@ -12,4 +12,5 @@ CREATE TABLE products (
   PRIMARY KEY (id)
 );
 
+-- **NOTE: the command below assumes that the products table already exists
 -- copy products from '/Users/katherinewang/Hack Reactor/HRLA33/SDC/searchbar-service/database/ikea_seed.csv' delimiter ',' csv header;
