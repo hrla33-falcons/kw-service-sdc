@@ -1,37 +1,63 @@
-const mysql = require('mysql');
-const mysqlConfig = require('./config.js');
+const Pool = require('pg').Pool;
 
-const db = mysql.createConnection(mysqlConfig);
+// using Pool instead of Client bc Pool supports concurrent requests and respresents
+// multiple Client "instances"
+const db = new Pool({
+  user: 'katherinewang',
+  host: 'localhost',
+  database: 'ikea',
+  password: null,
+  port: 5432
+});
 
-db.connect((err) => {
+db.connect(err => {
   if (err) {
-    console.error("Not Connected to Database")
+    console.log(err);
   } else {
-    console.log("Connected to Database!")
+    // double check connection by querying the current date and time
+    db.query('SELECT NOW()', (err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Connected to pg:', res.rows[0].now);
+      }
+    });
   }
-})
+});
 
+/* --API CALLS-- */
 
-const getProducts = function(id, callback) {
-  db.query(`SELECT * FROM cranberries WHERE letter IN ('${id}')`, (err, result) => {
+// check if there are 10M records
+const getCount = function(callback) {
+  db.query('SELECT COUNT(*) FROM products', (err, result) => {
     if (err) {
-      console.error(err);
+      console.log(err);
       callback(err);
     } else {
-      callback(null, result);
+      console.log(result);
+      callback(null, result.rows[0].count);
     }
   });
-}
+};
 
+const autoSearch = function(query, callback) {
+  // ^: matches the beginning of the input
+  // \b: matches a word boundary - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#special-word-boundary
+  // i: ignore case sensitivity
+  // var regex = new RegExp(`^${query}|\\b${query}`, `i`);
+  var queryString = `SELECT * FROM products WHERE name ~* '^${query}'`;
+  db.query(queryString, (err, result) => {
+    if (err) {
+      console.log(err);
+      callback(err);
+    } else {
+      console.log(result);
+      callback(null, result.rows);
+    }
+  });
+};
 
-module.exports.getProducts = getProducts;
-module.exports.db = db;
-
-
-// const response = (err, result, callback) => {
-//     if (err) {
-//       callback(err);
-//     } else {
-//       callback(null, result);
-//     }
-// };
+module.exports = {
+  getCount,
+  autoSearch
+};

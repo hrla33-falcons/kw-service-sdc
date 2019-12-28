@@ -1,6 +1,6 @@
 const express = require('express');
 const parser = require('body-parser');
-const dab = require('../database/index.js');
+const db = require('../database/index.js');
 const path = require('path');
 const morgan = require('morgan');
 
@@ -13,18 +13,29 @@ app.use(parser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
-app.get('/searchbar/:id', (req, res) => {
-	console.log(req.params);
-	dab.getProducts(req.params.id, (err, data) => {
-		if (err) {
-			console.error(err);
-			res.status(404).send('error retrieving products');
-		} else {
-			res.status(200).send(data);
-		}
-	});
+app.listen(PORT, () => {
+  console.log(`Connected to ${PORT}`);
 });
 
-app.listen(PORT, () => {
-	console.log(`server is listening on post apocalyptic ${PORT}`);
+app.get('/searchbar', (req, res) => {
+  db.getCount((err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(404).send("Couldn't get table count");
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+app.get('/searchbar/:query', ({ params }, res) => {
+  var query = params.query;
+  db.autoSearch(query, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(404).send(`Couldn't search query of ${query}`);
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
