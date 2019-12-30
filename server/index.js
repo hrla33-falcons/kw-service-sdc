@@ -17,7 +17,7 @@ app.listen(PORT, () => {
   console.log(`Connected to ${PORT}`);
 });
 
-app.get('/searchbar', (req, res) => {
+app.get('/searchbar/count', (req, res) => {
   db.getCount((err, data) => {
     if (err) {
       console.log(err);
