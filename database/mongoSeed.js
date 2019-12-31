@@ -44,7 +44,7 @@ const createProduct = function(id) {
   var randomProduct =
     productType[Math.floor(Math.random() * productType.length)];
   var randomDim = dimensions[Math.floor(Math.random() * dimensions.length)];
-  var randomImg = img(640, 480);
+  var randomImg = img(64, 64);
   function createArticles() {
     var min = Math.ceil(3);
     var max = Math.floor(6);
