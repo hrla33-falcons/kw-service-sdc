@@ -30,13 +30,13 @@ app.get('/searchbar/count', (req, res) => {
 
 app.get('/searchbar/:query', ({ params }, res) => {
   var query = params.query;
-  db.autoSearch(query)
-    .then(data => {
-      console.log('Successfully retrieved data!');
-      res.status(200).send(data);
-    })
-    .catch(err => {
+  db.autoSearch(query, (err, result) => {
+    if (err) {
       console.log("Couldn't retrieve data: ", err);
-      res.status(404).send("Couldn't retrieve data");
-    });
+      res.status(404).send("Couldn't retreive data");
+    } else {
+      console.log('Successfully retrieved data!');
+      res.status(200).send(result);
+    }
+  });
 });
