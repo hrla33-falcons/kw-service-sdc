@@ -50,9 +50,8 @@ const createProduct = function(id) {
     var max = Math.floor(6);
     var randomWordCount = Math.floor(Math.random() * (max - min) + min);
     var result = '';
-    for (var i = 0; i < 6; i++) {
-      result += randomArticle(randomWordCount) + '/';
-    }
+    result += randomArticle(randomWordCount);
+
     return result;
   }
 
