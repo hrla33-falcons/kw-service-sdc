@@ -1,37 +1,51 @@
-const mysql = require('mysql');
-const mysqlConfig = require('./config.js');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/ikea', {
+  useUnifiedTopology: true,
+  useNewUrlParser: true
+});
 
-const db = mysql.createConnection(mysqlConfig);
+const connection = mongoose.connection;
+connection.once('open', () => console.log('MongoDB connected successfully!'));
 
-db.connect((err) => {
-  if (err) {
-    console.error("Not Connected to Database")
-  } else {
-    console.log("Connected to Database!")
-  }
-})
+let productsSchema = mongoose.Schema({
+  product_ID: Number,
+  name: String,
+  type: String,
+  dimensions: String,
+  img: String,
+  relatedArticles: String
+});
 
+let products = mongoose.model('products', productsSchema);
 
-const getProducts = function(id, callback) {
-  db.query(`SELECT * FROM cranberries WHERE letter IN ('${id}')`, (err, result) => {
-    if (err) {
-      console.error(err);
-      callback(err);
-    } else {
-      callback(null, result);
-    }
+let getCount = () => {
+  return new Promise((resolve, reject) => {
+    products.count({}, (err, count) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(count);
+      }
+    });
   });
-}
+};
 
+let autoSearch = query => {
+  var regex = new RegExp(`^${query}|\\b${query}`, `i`);
+  return new Promise((resolve, reject) => {
+    products
+      .find({ name: regex }, (err, docs) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(docs);
+        }
+      })
+      .limit(12);
+  });
+};
 
-module.exports.getProducts = getProducts;
-module.exports.db = db;
-
-
-// const response = (err, result, callback) => {
-//     if (err) {
-//       callback(err);
-//     } else {
-//       callback(null, result);
-//     }
-// };
+module.exports = {
+  autoSearch,
+  getCount
+};
