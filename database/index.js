@@ -1,63 +1,51 @@
-const Pool = require('pg').Pool;
-
-// using Pool instead of Client bc Pool supports concurrent requests and respresents
-// multiple Client "instances"
-const db = new Pool({
-  user: 'katherinewang',
-  host: 'localhost',
-  database: 'ikea',
-  password: null,
-  port: 5432
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/ikea', {
+  useUnifiedTopology: true,
+  useNewUrlParser: true
 });
 
-db.connect(err => {
-  if (err) {
-    console.log(err);
-  } else {
-    // double check connection by querying the current date and time
-    db.query('SELECT NOW()', (err, res) => {
+const connection = mongoose.connection;
+connection.once('open', () => console.log('MongoDB connected successfully!'));
+
+let productsSchema = mongoose.Schema({
+  product_ID: Number,
+  name: String,
+  type: String,
+  dimensions: String,
+  img: String,
+  relatedArticles: String
+});
+
+let products = mongoose.model('products', productsSchema);
+
+let getCount = () => {
+  return new Promise((resolve, reject) => {
+    products.count({}, (err, count) => {
       if (err) {
-        console.log(err);
+        reject(err);
       } else {
-        console.log('Connected to pg:', res.rows[0].now);
+        resolve(count);
       }
     });
-  }
-});
-
-/* --API CALLS-- */
-
-// check if there are 10M records
-const getCount = function(callback) {
-  db.query('SELECT COUNT(*) FROM products', (err, result) => {
-    if (err) {
-      console.log(err);
-      callback(err);
-    } else {
-      console.log(result);
-      callback(null, result.rows[0].count);
-    }
   });
 };
 
-const autoSearch = function(query, callback) {
-  // ^: matches the beginning of the input
-  // \b: matches a word boundary - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#special-word-boundary
-  // i: ignore case sensitivity
-  // var regex = new RegExp(`^${query}|\\b${query}`, `i`);
-  var queryString = `SELECT * FROM products WHERE name ~* '^${query}' LIMIT 12`;
-  db.query(queryString, (err, result) => {
-    if (err) {
-      console.log(err);
-      callback(err);
-    } else {
-      console.log(result.rows);
-      callback(null, result.rows);
-    }
+let autoSearch = query => {
+  var regex = new RegExp(`^${query}|\\b${query}`, `i`);
+  return new Promise((resolve, reject) => {
+    products
+      .find({ name: regex }, (err, docs) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(docs);
+        }
+      })
+      .limit(12);
   });
 };
 
 module.exports = {
-  getCount,
-  autoSearch
+  autoSearch,
+  getCount
 };
