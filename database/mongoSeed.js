@@ -50,9 +50,8 @@ const createProduct = function(id) {
     var max = Math.floor(6);
     var randomWordCount = Math.floor(Math.random() * (max - min) + min);
     var result = '';
-    for (var i = 0; i < 6; i++) {
-      result += randomArticle(randomWordCount) + '/';
-    }
+    result += randomArticle(randomWordCount);
+
     return result;
   }
 
@@ -118,3 +117,6 @@ function write10Mil() {
     }
   }
 }
+
+// Import csv file to mongo
+// mongoimport -d ikea -c products --type csv --file ikea_seed_mongo.csv -f product_ID,name,type,dimensions,img,relatedArticle;

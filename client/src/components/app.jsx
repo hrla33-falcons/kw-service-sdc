@@ -12,7 +12,8 @@ class App extends React.Component {
       searchText: '',
       barOpen: false,
       suggestions: [],
-      slicedSugs: []
+      slicedSugs: [],
+      articles: []
     };
 
     this.flasher = this.flasher.bind(this);
@@ -20,6 +21,7 @@ class App extends React.Component {
     this.getProducts = this.getProducts.bind(this);
     this.searchType = this.searchType.bind(this);
     this.barToggle = this.barToggle.bind(this);
+    this.suggestedArticles = this.suggestedArticles.bind(this);
   }
 
   barToggle() {
@@ -45,15 +47,28 @@ class App extends React.Component {
     axios
       .get(`/searchbar/${query}`)
       .then(({ data }) => {
-        console.log(data);
-        var slug = data.slice(3);
-        this.setState({
-          suggestions: data,
-          slicedSugs: slug
-        });
+        var slug = data.slice(0, 4);
+        this.setState(
+          {
+            suggestions: data,
+            slicedSugs: slug
+          },
+          this.suggestedArticles(data.slice(0, 6))
+        );
         // console.log(this.state.suggestions);
       })
       .catch(err => console.error(err));
+  }
+
+  suggestedArticles(arr) {
+    var articles = [];
+    for (var product of arr) {
+      var articleTitle = product.relatedArticle;
+      articles.push(articleTitle.substring(0, articleTitle.length - 1)); // get rid of the period in each sentence
+    }
+    this.setState({
+      articles
+    });
   }
 
   flasher() {
@@ -82,6 +97,7 @@ class App extends React.Component {
         <div data-namespace='search-box-overlay'></div>
         <SearchBar
           sliced={this.state.slicedSugs}
+          articles={this.state.articles}
           suggestions={this.state.suggestions}
           flasher={this.state.flasher}
           searchType={this.searchType}
