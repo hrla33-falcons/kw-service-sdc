@@ -42,13 +42,13 @@ app.get('/searchbar/:query', ({ params }, res) => {
 });
 
 app.post('/searchbar/add', ({ body }, res) => {
-  db.postTest(body)
-    .then(result => {
+  db.postTest(body, (err, result) => {
+    if (err) {
+      console.log("Couldn't add data: ", err);
+      res.status(404).send("Couldn't add data");
+    } else {
       console.log(`Successfully added ${result}`);
       res.status(201).send(body);
-    })
-    .catch(err => {
-      console.log("Couldn't retrieve data: ", err);
-      res.status(404).send("Couldn't add data");
-    });
+    }
+  });
 });
