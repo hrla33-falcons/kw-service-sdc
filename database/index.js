@@ -58,6 +58,7 @@ const autoSearch = function(query, callback) {
 };
 
 module.exports = {
+  db,
   getCount,
   autoSearch
 };

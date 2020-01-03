@@ -2,7 +2,27 @@
 const faker = require('faker');
 const fs = require('file-system');
 const _progress = require('cli-progress');
+const path = require('path');
+const db = require('./index.js').db;
 
+async function createTable() {
+  await db.query('DROP TABLE IF EXISTS products;');
+  await db.query(
+    `CREATE TABLE products (
+      id INT NOT NULL,
+      name TEXT NOT NULL,
+      type TEXT NOT NULL,
+      dimension TEXT,
+      img TEXT NOT NULL,
+      relatedarticle TEXT NOT NULL,
+      PRIMARY KEY (id)
+      );
+    `
+  );
+}
+createTable();
+
+// random data helpers
 const randomLorem = faker.lorem.word;
 const productType = [
   'Chair',
@@ -39,6 +59,7 @@ const dimensions = [
 const randomArticle = faker.lorem.sentence;
 const img = faker.image.imageUrl;
 
+// create random product
 const createProduct = function(id) {
   var result = '';
   var randomProduct =
@@ -70,6 +91,7 @@ const createProduct = function(id) {
   return result;
 };
 
+// write data to a csv file
 const count = 10000000;
 const file = 'database/ikea_seed_pg.csv';
 
@@ -105,6 +127,15 @@ function write10Mil() {
       if (i === 0) {
         stream.write(createProduct(10000000 - i));
         stream.end();
+        var queryString =
+          "copy products from '/Users/katherinewang/Hack Reactor/HRLA33/SDC/searchbar-service/database/ikea_seed_pg.csv' delimiter ','";
+        db.query(queryString, err => {
+          if (err) {
+            console.log('Error in copy query', err);
+          } else {
+            console.log('Copied data to pg!');
+          }
+        });
       } else {
         ok = stream.write(createProduct(10000000 - i) + '\n');
         bar.update(count - i + 1);
