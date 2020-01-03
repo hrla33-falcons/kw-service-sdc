@@ -5,6 +5,9 @@ const _progress = require('cli-progress');
 const path = require('path');
 const db = require('./index.js').db;
 
+const absCSVPath = path.join(__dirname, 'ikea_seed_pg.csv');
+console.log('path', absCSVPath);
+
 async function createTable() {
   await db.query('DROP TABLE IF EXISTS products;');
   await db.query(
@@ -110,6 +113,7 @@ stream.on('close', () => {
   bar.stop();
   console.timeEnd();
   console.log('Successfully wrote file!');
+  console.log('Starting to copy CSV file to pg');
 });
 
 write10Mil();
@@ -127,8 +131,7 @@ function write10Mil() {
       if (i === 0) {
         stream.write(createProduct(10000000 - i));
         stream.end();
-        var queryString =
-          "copy products from '/Users/katherinewang/Hack Reactor/HRLA33/SDC/searchbar-service/database/ikea_seed_pg.csv' delimiter ','";
+        var queryString = `copy products from '${absCSVPath}' delimiter ','`;
         db.query(queryString, err => {
           if (err) {
             console.log('Error in copy query', err);
