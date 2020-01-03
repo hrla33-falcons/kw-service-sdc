@@ -65,7 +65,7 @@ const postTest = function(data, callback) {
       callback(err);
     } else {
       console.log('Successfully added data!', data);
-      callback(null, data);
+      callback(null, result);
     }
   });
 };
