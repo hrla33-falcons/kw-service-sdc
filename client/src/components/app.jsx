@@ -63,7 +63,7 @@ class App extends React.Component {
   suggestedArticles(arr) {
     var articles = [];
     for (var product of arr) {
-      var articleTitle = product.relatedArticle;
+      var articleTitle = product.relatedarticle;
       articles.push(articleTitle.substring(0, articleTitle.length - 1)); // get rid of the period in each sentence
     }
     this.setState({
