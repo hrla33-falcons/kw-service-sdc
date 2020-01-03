@@ -40,3 +40,15 @@ app.get('/searchbar/:query', ({ params }, res) => {
       res.status(404).send("Couldn't retrieve data");
     });
 });
+
+app.post('/searchbar/add', ({ body }, res) => {
+  db.postTest(body)
+    .then(result => {
+      console.log(`Successfully added ${result}`);
+      res.status(201).send(body);
+    })
+    .catch(err => {
+      console.log("Couldn't retrieve data: ", err);
+      res.status(404).send("Couldn't add data");
+    });
+});

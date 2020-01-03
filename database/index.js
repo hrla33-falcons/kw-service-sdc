@@ -57,7 +57,19 @@ const autoSearch = function(query, callback) {
   });
 };
 
+const postTest = function(data) {
+  var queryString = `INSERT INTO products(id, name, type, dimension, img, relatedarticle) VALUES ('${data.id}', '${data.name}', '${data.type}', '${data.dimension}', '${data.img}', '${data.relatedarticle}');`;
+  db.query(queryString, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Successfully added data!', data);
+    }
+  });
+};
+
 module.exports = {
+  postTest,
   getCount,
   autoSearch
 };
