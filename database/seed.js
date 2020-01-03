@@ -12,7 +12,7 @@ async function createTable() {
   await db.query('DROP TABLE IF EXISTS products;');
   await db.query(
     `CREATE TABLE products (
-      id INT NOT NULL,
+      id SERIAL,
       name TEXT NOT NULL,
       type TEXT NOT NULL,
       dimension TEXT,
