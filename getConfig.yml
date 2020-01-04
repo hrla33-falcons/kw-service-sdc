@@ -1,0 +1,18 @@
+config:
+  target: 'http://localhost:3002'
+  phases:
+    - duration: 60
+      arrivalRate: 100
+      rampTo: 500
+    - duration: 120
+      arrivalRate: 1000
+  # payload:
+  #   path: './database/ikea_seed_pg.csv'
+  #   fields:
+  #     - 'name'
+  #   skipHeader: true
+scenarios:
+  - flow:
+      - get:
+          url: '/searchbar/rei'
+          # url: '/searchbar/{{ name }}'
