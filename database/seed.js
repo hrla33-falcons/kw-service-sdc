@@ -120,9 +120,12 @@ write10Mil();
 function write10Mil() {
   console.time();
   let i = count;
-  // initiate the csv file with headers
+  // initiate the csv file with headers if it's still 10,0000,000
+  if (i === 10000000) {
+    stream.write('id,name,type,dimensions,img,relatedarticle\n');
+  }
+
   writeFile();
-  // stream.write('id,name,type,dimensions\n');
   function writeFile() {
     let ok = true;
     do {
@@ -131,12 +134,22 @@ function write10Mil() {
       if (i === 0) {
         stream.write(createProduct(10000000 - i));
         stream.end();
-        var queryString = `copy products from '${absCSVPath}' delimiter ','`;
+        var queryString = `copy products from '${absCSVPath}' delimiter ',' csv header`;
         db.query(queryString, err => {
           if (err) {
             console.log('Error in copy query', err);
           } else {
             console.log('Copied data to pg!');
+            db.query(
+              'CREATE INDEX name_index ON products (name text_pattern_ops)',
+              err => {
+                if (err) {
+                  console.log('Error in creating btree index', err);
+                } else {
+                  console.log('Created btree index!');
+                }
+              }
+            );
           }
         });
       } else {
