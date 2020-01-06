@@ -63,3 +63,4 @@ typings/
 # massive ikea seed csv
 database/ikea_seed_pg.csv
 database/ikea_seed_mongo.csv
+sdc-postgres.pem
