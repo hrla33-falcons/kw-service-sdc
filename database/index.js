@@ -3,7 +3,7 @@ const Pool = require('pg').Pool;
 // using Pool instead of Client bc Pool supports concurrent requests and respresents
 // multiple Client "instances"
 const db = new Pool({
-  user: 'katherinewang',
+  user: 'postgres',
   host: 'localhost',
   database: 'ikea',
   password: null,
