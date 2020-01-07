@@ -42,8 +42,8 @@ app.get('/searchbar/:query', ({ params }, res) => {
 });
 
 // loader.io verification
-app.get('/loaderio-ac15a44f85e2418383b94db3cbb696b0', (req, res) => {
-  res.status(200).send('loaderio-ac15a44f85e2418383b94db3cbb696b0');
+app.get('/loaderio-900c17d3ecf74114862768cc984ff338', (req, res) => {
+  res.status(200).send('loaderio-900c17d3ecf74114862768cc984ff338');
 });
 
 app.post('/searchbar/add', ({ body }, res) => {
