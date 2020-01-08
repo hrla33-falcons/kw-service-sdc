@@ -4,7 +4,7 @@ const Pool = require('pg').Pool;
 // multiple Client "instances"
 const db = new Pool({
   user: 'postgres',
-  host: '54.219.181.246',
+  host: '54.193.111.195',
   database: 'ikea',
   password: 'root',
   port: 5432
