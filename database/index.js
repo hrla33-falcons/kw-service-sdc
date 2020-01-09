@@ -1,12 +1,13 @@
 const Pool = require('pg').Pool;
+require('dotenv').config();
 
 // using Pool instead of Client bc Pool supports concurrent requests and respresents
 // multiple Client "instances"
 const db = new Pool({
-  user: 'postgres',
-  host: '54.193.111.195',
+  user: `${process.env.DB_USER}`,
+  host: `${process.env.DB_HOST}`,
   database: 'ikea',
-  password: 'root',
+  password: `${process.env.DB_PASS}`,
   port: 5432
 });
 
