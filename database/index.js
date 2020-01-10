@@ -52,7 +52,7 @@ const autoSearch = function(query, callback) {
       console.log(err);
       callback(err);
     } else {
-      console.log(result.rows);
+      // console.log(result.rows);
       callback(null, result.rows);
     }
   });

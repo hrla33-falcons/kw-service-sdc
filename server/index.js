@@ -35,13 +35,13 @@ app.get('/searchbar/:query', ({ params }, res) => {
       console.log("Couldn't retrieve data: ", err);
       res.status(404).send("Couldn't retreive data");
     } else {
-      console.log('Successfully retrieved data!');
+      // console.log('Successfully retrieved data!');
       res.status(200).send(result);
     }
   });
 });
 
-// loader.io verification
+// loader.io verification: key is subject to change with each use
 app.get('/loaderio-900c17d3ecf74114862768cc984ff338', (req, res) => {
   res.status(200).send('loaderio-900c17d3ecf74114862768cc984ff338');
 });
