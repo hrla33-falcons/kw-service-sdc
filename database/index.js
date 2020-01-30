@@ -42,17 +42,11 @@ const getCount = function(callback) {
 };
 
 const autoSearch = function(query, callback) {
-  // ^: matches the beginning of the input
-  // \b: matches a word boundary - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#special-word-boundary
-  // i: ignore case sensitivity
-  // var regex = new RegExp(`^${query}|\\b${query}`, `i`);
   var queryString = `SELECT * FROM products WHERE name ~* '^${query}' LIMIT 12`;
   db.query(queryString, (err, result) => {
     if (err) {
-      console.log(err);
       callback(err);
     } else {
-      // console.log(result.rows);
       callback(null, result.rows);
     }
   });

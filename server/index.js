@@ -35,7 +35,6 @@ app.get('/searchbar/:query', ({ params }, res) => {
       console.log("Couldn't retrieve data: ", err);
       res.status(404).send("Couldn't retreive data");
     } else {
-      // console.log('Successfully retrieved data!');
       res.status(200).send(result);
     }
   });

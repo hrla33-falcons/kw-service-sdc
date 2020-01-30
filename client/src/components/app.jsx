@@ -35,9 +35,6 @@ class App extends React.Component {
       searchText: e.target.value
     });
     this.getProducts(e.target.value);
-    // if (this.state.searchText.length === 0) {
-    //   this.flasher();
-    // }
   }
 
   getProducts(query) {
@@ -55,7 +52,6 @@ class App extends React.Component {
           },
           this.suggestedArticles(data.slice(0, 6))
         );
-        // console.log(this.state.suggestions);
       })
       .catch(err => console.error(err));
   }

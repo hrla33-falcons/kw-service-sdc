@@ -1,7 +1,9 @@
 /* @import "compass/css3"; */
 
-@keyframes fadeIn { 
-  from { opacity: 0; } 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
 }
 
 .sb-a {
@@ -19,7 +21,7 @@
   z-index: 9;
   width: 100%;
   background: #fff;
-  box-shadow: 0 14px 10px 1px rgba(0,0,0,.2);
+  box-shadow: 0 14px 10px 1px rgba(0, 0, 0, 0.2);
   display: flex;
 }
 
@@ -29,7 +31,7 @@
   display: flex;
   flex-grow: 1;
   max-width: 90rem;
-  padding: 1rem .5rem;
+  padding: 1rem 0.5rem;
   margin: 0 auto;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -37,7 +39,7 @@
 }
 
 .sb-search-results__container {
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   padding-top: 0;
   -webkit-box-flex: 0;
   flex: 0 0 25%;
@@ -49,8 +51,8 @@
   -webkit-box-align: center;
   align-items: center;
   margin-left: 2rem;
-  margin: .5rem 0 .5rem 1rem;
-  font-size: .75rem;
+  margin: 0.5rem 0 0.5rem 1rem;
+  font-size: 0.75rem;
   font-weight: 400;
   color: #959595;
 }
@@ -68,7 +70,7 @@
 }
 
 .dd-sb-search-results-item__link {
-  padding: .4rem 1rem;
+  padding: 0.4rem 1rem;
   color: black;
   text-decoration: none;
   width: 100%;
@@ -80,12 +82,12 @@
 
 .dd-sb-product-suggestions-item__link {
   display: flex;
-  padding-top: .5rem;
+  padding-top: 0.5rem;
 }
 
 .dd-sb-search-results-item__link-nd {
-  padding: .5rem 2rem;
-  color:#0558a3;
+  padding: 0.5rem 2rem;
+  color: #0558a3;
   text-decoration: none;
   font-weight: 400;
   position: relative;
@@ -143,7 +145,7 @@
 .dd-sb-product-suggestions-item__image {
   position: relative;
   display: flex;
-  padding-top: .5rem;
+  padding-top: 0.5rem;
 }
 
 .dd-sb-product-suggestions-item__heading {
@@ -152,12 +154,12 @@
 }
 
 .dd-sb-product-suggestions-item__measurements {
-  font-size: .875rem;
+  font-size: 0.875rem;
   color: #666;
 }
 
 .dd-sb-product-suggestions-item__type {
-  font-size: .875rem;
+  font-size: 0.875rem;
   color: #666;
 }
 
@@ -167,22 +169,19 @@
 }
 
 .sb-searchbar {
-    /* font-family: 'Noto IKEA', 'Noto Sans', 'Roboto', 'Open Sans', sans-serif !important; */
-    background: #fff;
-    color: #111;
-    min-height: 100%;
-    line-height: 1.5;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    /* font: 100% sans-serif; */
-    box-sizing: border-box;
-    width: 99.9%;
+  /* font-family: 'Noto IKEA', 'Noto Sans', 'Roboto', 'Open Sans', sans-serif !important; */
+  background: #fff;
+  color: #111;
+  min-height: 100%;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  /* font: 100% sans-serif; */
+  box-sizing: border-box;
+  width: 99.9%;
 }
-
-
-
 
 .sb-header {
   display: flex;
@@ -192,13 +191,13 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
-  left: -.5rem;
-  top: -.5rem;
+  left: -0.5rem;
+  top: -0.5rem;
   width: 100%;
 }
 
 .sb-header__container {
-  padding: .5rem .5rem .5rem 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
   margin: auto;
   max-width: 90rem;
   max-height: 48px;
@@ -217,7 +216,6 @@
 .header__icon-list-item {
   display: inline-block;
 }
-
 
 .header__ikea-logo {
   width: 6.25rem;
@@ -244,7 +242,7 @@
   bottom: 0;
   left: -100%;
   flex-direction: column;
-  transition: transform ease-in-out .3s;
+  transition: transform ease-in-out 0.3s;
 }
 
 .header__main-nav--wrapper {
@@ -279,8 +277,8 @@
   max-width: 1390px;
   margin: 0 auto;
   padding-left: 0;
-  padding-top: .4rem;
-  padding-bottom: .6rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.6rem;
 }
 
 .header-top-menu-item {
@@ -288,10 +286,10 @@
 }
 
 .header-top-menu-link {
-    margin: 0 1rem;
-    padding: 1rem .5rem;
-    color: #666;
-    text-decoration: none;
+  margin: 0 1rem;
+  padding: 1rem 0.5rem;
+  color: #666;
+  text-decoration: none;
 }
 
 .header__wrapper {
@@ -302,13 +300,13 @@
 
 .hnf-btn__badge {
   position: absolute;
-  top: -.25rem;
-  transform: translateX(-.5rem);
+  top: -0.25rem;
+  transform: translateX(-0.5rem);
   background: #ffdb00;
-  padding: 0 .295rem;
+  padding: 0 0.295rem;
   border-radius: 8px;
   font-weight: 700;
-  font-size: .75rem;
+  font-size: 0.75rem;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 5rem;
@@ -334,19 +332,19 @@
   text-decoration: none;
   border: 0;
   font-weight: 700;
-  font-size: .875rem;
-  transition-property: background-color,border-radius,width;
-  transition-duration: .3s;
+  font-size: 0.875rem;
+  transition-property: background-color, border-radius, width;
+  transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.4, 0, 0, 1);
-  background: rgba(0,0,0,0);
+  background: rgba(0, 0, 0, 0);
   border-radius: 50%;
-  padding: .75rem;
+  padding: 0.75rem;
   line-height: 0;
   position: relative;
 }
 
 .hnf-btn--icon:hover {
-  background: rgba(204,204,204,0.5);
+  background: rgba(204, 204, 204, 0.5);
   transform: scale(1);
 }
 
@@ -359,8 +357,8 @@
   width: 100%;
   height: 100%;
   transform: scale(0);
-  transition-property: transform,background-color;
-  transition-duration: .3s;
+  transition-property: transform, background-color;
+  transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.4, 0, 0, 1);
 }
 
@@ -386,7 +384,7 @@
 }
 
 .hnf-svg-icon--100 {
-  margin-left: .25rem;
+  margin-left: 0.25rem;
   width: 1rem;
 }
 
@@ -422,7 +420,7 @@
 .main-bygga-menu__button--svg {
   position: static;
   transition-duration: 0s;
-  margin-top: .25rem;
+  margin-top: 0.25rem;
   right: 1rem;
 }
 
@@ -448,10 +446,6 @@
   white-space: nowrap;
 }
 
-/* .searchbar-div {
-  display: flex;
-} */
-
 .searchbar-padder {
   padding: 0px 10px 0px 10px;
 }
@@ -460,7 +454,6 @@
   position: relative;
   line-height: 1.5rem;
   background: #fff;
-  /* padding-left: 14rem; */
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -471,27 +464,13 @@
   position: relative;
   width: 98%;
   max-width: 1414px;
-  padding: 0 0 .5rem 0;
-  /* margin: 0 1rem; */
-  /* background-color: #0058a3; */
+  padding: 0 0 0.5rem 0;
 }
-
-/* .search-field:before {
-  position: absolute;
-  top: 50%;
-  left: 1rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  pointer-events: none;
-  content: "";
-  transform: translateY(-50%);
-  background: url("//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
-} */
 
 .search-field__input {
   display: block;
   width: 100%;
-  padding: .75rem 7.25rem .75rem 3.25rem;
+  padding: 0.75rem 7.25rem 0.75rem 3.25rem;
   margin: 0 auto;
   font-size: 16px;
   line-height: 1.5;
@@ -509,7 +488,7 @@
 .search-suggestions {
   position: absolute;
   top: 45%;
-  left: .4rem;
+  left: 0.4rem;
   color: #666;
   pointer-events: none;
   transform: translateY(-50%);
@@ -531,22 +510,21 @@
   list-style: none;
 }
 
-
 .top-menu__contend-d {
   display: flex;
   flex-direction: row;
   max-width: 1390px;
   margin: 0 auto;
   padding-left: 0;
-  padding-top: .4rem;
-  padding-bottom: .6rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.6rem;
   width: 100%;
 }
 
 .top-menu-d {
   background-color: #eee;
   width: 99%;
-  padding: 0 0 0 1.65rem ;
+  padding: 0 0 0 1.65rem;
 }
 
 .top-menu__item {
@@ -559,7 +537,7 @@
 
 .top-menu__link-d {
   margin: 0 1rem;
-  padding: 1rem .5rem;
+  padding: 1rem 0.5rem;
   color: #666;
   text-decoration: none;
 }
